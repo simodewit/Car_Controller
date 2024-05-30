@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -79,8 +78,6 @@ public class Engine : MonoBehaviour
             // lerp rpm to ideal rpm when decelerating the rpm's
             rpm = Mathf.Lerp(rpm, targetRPM, inertia);
         }
-
-        print(rpm);
     }
 
     #endregion

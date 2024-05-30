@@ -16,13 +16,13 @@ public class Steering : MonoBehaviour
 
     [Header("Wheels")]
     [Tooltip("The front left wheelController")]
-    [SerializeField] private WheelController FL;
+    [SerializeField] private Tyre FL;
     [Tooltip("The front right wheelController")]
-    [SerializeField] private WheelController FR;
+    [SerializeField] private Tyre FR;
     [Tooltip("The rear left wheelController")]
-    [SerializeField] private WheelController RL;
+    [SerializeField] private Tyre RL;
     [Tooltip("The rear right wheelController")]
-    [SerializeField] private WheelController RR;
+    [SerializeField] private Tyre RR;
 
     [Header("Steering")]
     [Tooltip("The type of steering")]

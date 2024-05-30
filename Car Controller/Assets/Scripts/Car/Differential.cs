@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Differential : MonoBehaviour
 {
+    #region variables
+
     [Header("Wheels")]
     [Tooltip("The rear left wheelController")]
-    [SerializeField] private WheelController leftWheel;
+    [SerializeField] private Tyre leftWheel;
     [Tooltip("The rear right wheelController")]
-    [SerializeField] private WheelController rightWheel;
+    [SerializeField] private Tyre rightWheel;
 
     [Header("Differential")]
     [Tooltip("The gearbox script")]
@@ -18,15 +20,31 @@ public class Differential : MonoBehaviour
     [Tooltip("How much of the differential can be opened or closed"), Range(0, 100)]
     [SerializeField] private float diffLock;
 
+    private int amountOfDifferentials;
+
+    #endregion
+
+    #region start and update
+
+    public void Start()
+    {
+        Differential[] diffs = FindObjectsOfType<Differential>();
+        amountOfDifferentials = diffs.Length;
+    }
+
     public void FixedUpdate()
     {
         Diff();
     }
 
+    #endregion
+
+    #region differential
+
     private void Diff()
     {
         //calculate the amount of torque before dividing
-        float entryTorque = gearBox.outputTorque * finalGearRatio;
+        float entryTorque = gearBox.outputTorque * finalGearRatio / amountOfDifferentials;
 
         float leftRPM = leftWheel.rpm;
         float rightRPM = rightWheel.rpm;
@@ -35,4 +53,6 @@ public class Differential : MonoBehaviour
         leftWheel.motorTorque = entryTorque / 2;
         rightWheel.motorTorque = entryTorque / 2;
     }
+
+    #endregion
 }

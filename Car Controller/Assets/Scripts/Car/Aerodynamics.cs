@@ -29,8 +29,8 @@ public class Aerodynamics : MonoBehaviour
     {
         if (windSpeed == null)
         {
-            return;
             print("Windspeed is missing (from aero script)");
+            return;
         }
 
         //calculate wind speeds

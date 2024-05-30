@@ -9,13 +9,13 @@ public class Brakes : MonoBehaviour
 
     [Header("Wheels")]
     [Tooltip("The front left wheelController")]
-    [SerializeField] private WheelController FL;
+    [SerializeField] private Tyre FL;
     [Tooltip("The front right wheelController")]
-    [SerializeField] private WheelController FR;
+    [SerializeField] private Tyre FR;
     [Tooltip("The rear left wheelController")]
-    [SerializeField] private WheelController RL;
+    [SerializeField] private Tyre RL;
     [Tooltip("The rear right wheelController")]
-    [SerializeField] private WheelController RR;
+    [SerializeField] private Tyre RR;
 
     [Header("Brakes")]
     [Tooltip("The total newton meters of torque that the car has"), Range(0, 5000)]
@@ -34,7 +34,7 @@ public class Brakes : MonoBehaviour
 
     #region update and input
 
-    public void FixedUpdate()
+    public void Update()
     {
         Braking();
     }
@@ -50,7 +50,7 @@ public class Brakes : MonoBehaviour
 
     private void Braking()
     {
-        if (brakeAxis > (brakeDeadzone / 100) && brakeAxis < (maxForce / 100))
+        if (brakeAxis > (brakeDeadzone / 100) && brakeAxis <= (maxForce / 100))
         {
             float frontBrakes = brakeBalance / 100;
             float rearBrakes = (100 - brakeBalance) / 100;
