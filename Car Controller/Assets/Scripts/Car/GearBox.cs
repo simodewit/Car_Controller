@@ -13,7 +13,7 @@ public class GearBox : MonoBehaviour
     [Tooltip("If this is enabled it will stop you from shifting down into a gear that would create to much rpm's")]
     [SerializeField] private bool shiftAssist = true;
     [Tooltip("The info for every gear")]
-    [SerializeField] private GearInfo[] gears;
+    public GearInfo[] gears; // has to be public for the engine
 
     [HideInInspector] public int currentGear;
     [HideInInspector] public float outputTorque;
@@ -61,6 +61,7 @@ public class GearBox : MonoBehaviour
             }
             else
             {
+                print(afterShiftRPM);
                 print("you moneyshifted");
             }
         }

@@ -7,6 +7,9 @@ public class Engine : MonoBehaviour
 {
     #region variables
 
+    [Tooltip("The script of the gearbox")]
+    [SerializeField] private GearBox gearBox;
+
     [Tooltip("The deadzone in the pedal before the throttle is used"), Range(0, 100)]
     [SerializeField] private float throttleDeadzone = 0;
     [Tooltip("The maximum rpm that the engine can run"), Range(0, 25000)]
@@ -66,7 +69,7 @@ public class Engine : MonoBehaviour
     private void UpdateRPM()
     {
         // calculate ideal rpm
-        float targetRPM = throttleAxis * maxRPM;
+        float targetRPM = throttleAxis * maxRPM / gearBox.gears[gearBox.currentGear + 1].gearRatio;
 
         if (rpm < targetRPM && rpm < maxRPM)
         {

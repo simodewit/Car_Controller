@@ -27,6 +27,7 @@ public class Tyre : MonoBehaviour
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public float rpm;
     [HideInInspector] public float radius;
+    [HideInInspector] public float totalGrip;
 
     //set variables
     [HideInInspector] public float motorTorque;
@@ -187,7 +188,7 @@ public class Tyre : MonoBehaviour
         dotProduct = Mathf.Clamp(dotProduct, -1, 1);
 
         //calculate the amount of force that should be applied
-        float forceToPush = carRb.mass * (tyreVelocity.magnitude * dotProduct);
+        float idealForce = carRb.mass * (tyreVelocity.magnitude * dotProduct);
 
         //calculate available grip of tyre
         float curveProduct = gripCurve.Evaluate(Mathf.Abs(dotProduct));
@@ -196,13 +197,16 @@ public class Tyre : MonoBehaviour
         float weightFactor = suspension.springForce / (carRb.mass * Physics.gravity.y / 4);
 
         //add al the modifiers for the grip
-        forceToPush = forceToPush * gripFactor * curveProduct * weightFactor;
+        float forceToPush = idealForce * gripFactor * curveProduct * weightFactor;
 
         //put the force to the right direction
         Vector3 forceDirection = -transform.right * forceToPush;
 
         //apply the force to the car
         carRb.AddForceAtPosition(forceDirection, forcePoint);
+
+        //calculate the total grip of the vehicle
+        totalGrip = forceToPush / idealForce;
     }
 
     #endregion

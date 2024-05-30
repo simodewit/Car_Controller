@@ -27,6 +27,8 @@ public class Brakes : MonoBehaviour
     [Tooltip("The deadzone in the pedal before the brake is used in percentage"), Range(0, 100)]
     [SerializeField] private float brakeDeadzone = 0;
 
+    [HideInInspector] public float brakeOutput;
+
     //private variables
     private float brakeAxis;
 
@@ -37,6 +39,7 @@ public class Brakes : MonoBehaviour
     public void Update()
     {
         Braking();
+        brakeOutput = brakeTorque * brakeAxis;
     }
 
     public void BrakeInput(InputAction.CallbackContext context)

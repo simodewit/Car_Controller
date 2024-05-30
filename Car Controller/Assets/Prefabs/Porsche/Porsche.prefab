@@ -511,6 +511,7 @@ Transform:
   - {fileID: 5136974882157361570}
   - {fileID: 4509194579155246528}
   - {fileID: 4670957277960654098}
+  - {fileID: 4418666355636498792}
   - {fileID: 6789540193320401634}
   - {fileID: 852565956441141535}
   - {fileID: 8764804531241148961}
@@ -1128,6 +1129,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
+  totalGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
@@ -1513,6 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80591deafa5bcf24e888b508b275b40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gearBox: {fileID: 2314671419084953047}
   throttleDeadzone: 0
   maxRPM: 7500
   inertia: 0.001
@@ -1629,6 +1632,7 @@ MonoBehaviour:
   spring: 200000
   damper: 5000
   springTravel: 0.3
+  rideHeight: -0.1
   springCurve:
     serializedVersion: 2
     m_Curve:
@@ -1653,7 +1657,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rideHeight: -0.1
   springTargetPos: {fileID: 0}
   distanceInSpring: 0
   springForce: 0
@@ -1707,6 +1710,7 @@ MonoBehaviour:
   spring: 200000
   damper: 5000
   springTravel: 0.3
+  rideHeight: -0.1
   springCurve:
     serializedVersion: 2
     m_Curve:
@@ -1731,7 +1735,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rideHeight: -0.1
   springTargetPos: {fileID: 0}
   distanceInSpring: 0
   springForce: 0
@@ -2424,10 +2427,11 @@ MonoBehaviour:
   FR: {fileID: 6406425358557920688}
   RL: {fileID: 2993671199834311460}
   RR: {fileID: 8963117182262554756}
-  brakeTorque: 4074
+  brakeTorque: 4000
   brakeBalance: 50
   maxForce: 100
   brakeDeadzone: 0
+  brakeOutput: 0
 --- !u!1 &3705174868781020693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,6 +3438,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
+  totalGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
@@ -4616,9 +4621,79 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
+  totalGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
+--- !u!1 &7043539014255287905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4418666355636498792}
+  - component: {fileID: 4271082990849532523}
+  m_Layer: 0
+  m_Name: CarData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4418666355636498792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7043539014255287905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7510079378311824192}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4271082990849532523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7043539014255287905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56837a6d873224c418e5d82b9ccca91f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carRb: {fileID: 5875228716191928938}
+  engine: {fileID: 6828432901003150431}
+  gearBox: {fileID: 2314671419084953047}
+  brakes: {fileID: 1089898495937828498}
+  tyreFR: {fileID: 6406425358557920688}
+  suspensionFR: {fileID: 3770206932899571009}
+  tyreFL: {fileID: 2775157751912482328}
+  suspensionFL: {fileID: 5291346110737327928}
+  tyreRR: {fileID: 8963117182262554756}
+  suspensionRR: {fileID: 6483334105223339876}
+  tyreRL: {fileID: 2993671199834311460}
+  suspensionRL: {fileID: 1859780186786816492}
+  gear: 0
+  rpm: 0
+  speed: 0
+  engineTorque: 0
+  brakeTorque: 0
+  suspensionDistanceFR: 0
+  gripFR: 0
+  suspensionDistanceLF: 0
+  gripFL: 0
+  suspensionDistanceRR: 0
+  gripRR: 0
+  suspensionDistanceRL: 0
+  gripRL: 0
 --- !u!1 &7054739544840615316
 GameObject:
   m_ObjectHideFlags: 0
@@ -5504,6 +5579,7 @@ MonoBehaviour:
   spring: 200000
   damper: 5000
   springTravel: 0.3
+  rideHeight: -0.1
   springCurve:
     serializedVersion: 2
     m_Curve:
@@ -5528,7 +5604,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rideHeight: -0.1
   springTargetPos: {fileID: 0}
   distanceInSpring: 0
   springForce: 0
@@ -5831,6 +5906,7 @@ MonoBehaviour:
   spring: 200000
   damper: 5000
   springTravel: 0.3
+  rideHeight: -0.1
   springCurve:
     serializedVersion: 2
     m_Curve:
@@ -5855,7 +5931,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rideHeight: -0.1
   springTargetPos: {fileID: 0}
   distanceInSpring: 0
   springForce: 0
@@ -6222,6 +6297,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
+  totalGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
