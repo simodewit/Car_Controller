@@ -67,9 +67,9 @@ public class CarData : MonoBehaviour
         suspensionDistanceRR = suspensionRR.distanceInSpring;
         suspensionDistanceRL = suspensionRL.distanceInSpring;
 
-        gripFR = tyreFR.totalGrip;
-        gripFL = tyreFL.totalGrip;
-        gripRR = tyreRR.totalGrip;
-        gripRL = tyreRL.totalGrip;
+        gripFR = tyreFR.totalSidewayGrip;
+        gripFL = tyreFL.totalSidewayGrip;
+        gripRR = tyreRR.totalSidewayGrip;
+        gripRL = tyreRL.totalSidewayGrip;
     }
 }

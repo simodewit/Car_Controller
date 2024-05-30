@@ -1580,6 +1580,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  rpmChangeRate: 1000
   rpm: 0
   outputTorque: 0
 --- !u!1 &1714477363933023971

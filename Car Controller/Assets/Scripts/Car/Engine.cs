@@ -14,12 +14,12 @@ public class Engine : MonoBehaviour
     [SerializeField] private float throttleDeadzone = 0;
     [Tooltip("The maximum rpm that the engine can run"), Range(0, 25000)]
     public int maxRPM = 5000; //has to be public for the gearbox
-    [Tooltip("The maximum rpm that the engine can run"), /*Range(0, 3)*/]
-    [SerializeField] private float inertia = 0.1f;
     [Tooltip("The total newton meters of torque that the car has"), Range(0, 5000)]
     [SerializeField] private float torque = 200;
     [Tooltip("The torque given at specific moments"), Curve(0, 0, 1f, 1f, true)]
     [SerializeField] private AnimationCurve torqueCurve;
+    [Tooltip("The max speed that the engine can increase rpm's with")]
+    [SerializeField] private float rpmChangeRate;
 
     //get variables
     [HideInInspector] public float rpm;
@@ -45,42 +45,17 @@ public class Engine : MonoBehaviour
 
     #endregion
 
-    #region hard lerp
-
-    public float HardLerp(float current, float end, float speed)
-    {
-        // calculate the difference between current and end values
-        float difference = end - current;
-
-        // calculate the increment based on speed
-        float add = speed * Time.fixedDeltaTime;
-
-        // clamp the value so it doesnt overshoot
-        add = Mathf.Clamp(add, -Mathf.Abs(difference), Mathf.Abs(difference));
-
-        //return the value
-        return current + add;
-    }
-
-    #endregion
-
     #region RPM
 
     private void UpdateRPM()
     {
-        // calculate ideal rpm
-        float targetRPM = throttleAxis * maxRPM / gearBox.gears[gearBox.currentGear + 1].gearRatio;
+        //should add a form of inertia here maby
+        //should also work with the amount of air intake
+        //should also lower rpm when no torque is applied
 
-        if (rpm < targetRPM && rpm < maxRPM)
-        {
-            // lerp rpm to ideal rpm when accelerating the rpm's
-            rpm = Mathf.Lerp(rpm, targetRPM, inertia);
-        }
-        else if(rpm > targetRPM || rpm > maxRPM)
-        {
-            // lerp rpm to ideal rpm when decelerating the rpm's
-            rpm = Mathf.Lerp(rpm, targetRPM, inertia);
-        }
+        float targetRPM = throttleAxis * maxRPM;
+
+        rpm = Mathf.MoveTowards(rpm, targetRPM, rpmChangeRate * Time.fixedDeltaTime);
     }
 
     #endregion
@@ -99,6 +74,11 @@ public class Engine : MonoBehaviour
         if (throttleAxis > throttleDeadzone)
         {
             totalTorque = torqueOutput * throttleAxis;
+        }
+
+        if (rpm > maxRPM)
+        {
+            totalTorque = 0;
         }
 
         //apply the torque

@@ -27,7 +27,7 @@ public class Tyre : MonoBehaviour
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public float rpm;
     [HideInInspector] public float radius;
-    [HideInInspector] public float totalGrip;
+    [HideInInspector] public float totalSidewayGrip;
 
     //set variables
     [HideInInspector] public float motorTorque;
@@ -35,8 +35,9 @@ public class Tyre : MonoBehaviour
     [HideInInspector] public float steerAngle;
 
     //private variables
-    private List<GameObject> colliders = new List<GameObject>();
+    private List<SurfaceType> surfaces = new List<SurfaceType>();
     private Rigidbody rb;
+    private float surfaceGrip;
 
     #endregion
 
@@ -56,6 +57,7 @@ public class Tyre : MonoBehaviour
 
     public void Update()
     {
+        RPM();
         Clamps();
         CollisionCheck();
     }
@@ -99,6 +101,8 @@ public class Tyre : MonoBehaviour
         }
 
         transform.localEulerAngles = localEulers;
+
+        transform.Rotate(new Vector3(rpm, 0, 0) * Time.deltaTime);
     }
 
     private void ClampVelocity()
@@ -128,8 +132,6 @@ public class Tyre : MonoBehaviour
         //calculate rpm
         float currentRPM = velocity / circumfrence * 60;
 
-        //add modifiers
-
         //add the rpm's
         rpm = currentRPM;
     }
@@ -145,23 +147,37 @@ public class Tyre : MonoBehaviour
             radius = Vector3.Distance(transform.position, collision.GetContact(0).point);
         }
 
-        colliders.Add(collision.gameObject);
+        if (collision.transform.GetComponent<SurfaceType>() != null)
+        {
+            surfaces.Add(collision.transform.GetComponent<SurfaceType>());
+        }
     }
 
     public void OnCollisionExit(Collision collision)
     {
-        colliders.Remove(collision.gameObject);
+        if (collision.transform.GetComponent<SurfaceType>() != null)
+        {
+            surfaces.Remove(collision.transform.GetComponent<SurfaceType>());
+        }
     }
 
     private void CollisionCheck()
     {
-        if (colliders.Count == 0)
+        if (surfaces.Count == 0)
         {
             isGrounded = false;
         }
         else
         {
             isGrounded = true;
+
+            float totalGrip = 0;
+            foreach (SurfaceType surface in surfaces)
+            {
+                totalGrip += surface.grip / 100;
+            }
+
+            surfaceGrip = totalGrip / surfaces.Count;
         }
     }
 
@@ -197,7 +213,7 @@ public class Tyre : MonoBehaviour
         float weightFactor = suspension.springForce / (carRb.mass * Physics.gravity.y / 4);
 
         //add al the modifiers for the grip
-        float forceToPush = idealForce * gripFactor * curveProduct * weightFactor;
+        float forceToPush = idealForce * gripFactor * curveProduct * weightFactor * surfaceGrip;
 
         //put the force to the right direction
         Vector3 forceDirection = -transform.right * forceToPush;
@@ -206,7 +222,7 @@ public class Tyre : MonoBehaviour
         carRb.AddForceAtPosition(forceDirection, forcePoint);
 
         //calculate the total grip of the vehicle
-        totalGrip = forceToPush / idealForce;
+        totalSidewayGrip = forceToPush / idealForce;
     }
 
     #endregion
