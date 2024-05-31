@@ -9,6 +9,7 @@ public class CarData : MonoBehaviour
     [SerializeField] private Engine engine;
     [SerializeField] private GearBox gearBox;
     [SerializeField] private Brakes brakes;
+    [SerializeField] private FuelTank fuelTank;
 
     [Header("Front right")]
     [SerializeField] private Tyre tyreFR;
@@ -26,12 +27,15 @@ public class CarData : MonoBehaviour
     [SerializeField] private Tyre tyreRL;
     [SerializeField] private Suspension suspensionRL;
 
+    [Space(50)]
+    [Header("These are all read values")]
     [Header("Output")]
     public int gear;
     public float rpm;
     public float speed;
     public float engineTorque;
     public float brakeTorque;
+    public float fuel;
 
     [Header("Front right")]
     public float suspensionDistanceFR;
@@ -61,6 +65,7 @@ public class CarData : MonoBehaviour
         speed = carRb.velocity.magnitude * 3.6f;
         engineTorque = engine.outputTorque;
         brakeTorque = brakes.brakeOutput;
+        fuel = fuelTank.fuel;
 
         suspensionDistanceFR = suspensionFR.distanceInSpring;
         suspensionDistanceLF = suspensionFL.distanceInSpring;

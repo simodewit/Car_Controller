@@ -9,24 +9,25 @@ public class Engine : MonoBehaviour
 
     [Tooltip("The script of the gearbox")]
     [SerializeField] private GearBox gearBox;
+    [Tooltip("The script of the throttle body")]
+    [SerializeField] private ThrottleBody throttleBody;
+    [Tooltip("The fuel tank script")]
+    [SerializeField] private FuelTank fuelTank;
 
-    [Tooltip("The deadzone in the pedal before the throttle is used"), Range(0, 100)]
-    [SerializeField] private float throttleDeadzone = 0;
     [Tooltip("The maximum rpm that the engine can run"), Range(0, 25000)]
     public int maxRPM = 5000; //has to be public for the gearbox
     [Tooltip("The total newton meters of torque that the car has"), Range(0, 5000)]
     [SerializeField] private float torque = 200;
     [Tooltip("The torque given at specific moments"), Curve(0, 0, 1f, 1f, true)]
     [SerializeField] private AnimationCurve torqueCurve;
-    [Tooltip("The max speed that the engine can increase rpm's with")]
-    [SerializeField] private float rpmChangeRate;
+    [Tooltip("The amount of fuel used per 1l air in mililiter"), Range(0, 10)]
+    [SerializeField] private float fuelUsage;
 
     //get variables
+    [Tooltip("The rpm of the engine")]
     [HideInInspector] public float rpm;
+    [Tooltip("The output torque of the engine onto the gearbox")]
     [HideInInspector] public float outputTorque;
-
-    //private variables
-    private float throttleAxis;
 
     #endregion
 
@@ -34,13 +35,19 @@ public class Engine : MonoBehaviour
 
     public void FixedUpdate()
     {
+        FuelConsumtion();
         UpdateRPM();
         CalculateTorque();
     }
 
-    public void ThrottleInput(InputAction.CallbackContext context)
+    #endregion
+
+    #region fuel consumption
+
+    private void FuelConsumtion()
     {
-        throttleAxis = context.ReadValue<float>();
+        float fuelUsed = throttleBody.air * fuelUsage * 0.001f * Time.fixedDeltaTime;
+        fuelTank.fuel -= fuelUsed;
     }
 
     #endregion
@@ -49,13 +56,11 @@ public class Engine : MonoBehaviour
 
     private void UpdateRPM()
     {
-        //should add a form of inertia here maby
-        //should also work with the amount of air intake
-        //should also lower rpm when no torque is applied
+        float rpmToAdd = 0;
 
-        float targetRPM = throttleAxis * maxRPM;
 
-        rpm = Mathf.MoveTowards(rpm, targetRPM, rpmChangeRate * Time.fixedDeltaTime);
+
+        rpm = rpmToAdd;
     }
 
     #endregion
@@ -71,14 +76,13 @@ public class Engine : MonoBehaviour
         float curveMultiplier = torqueCurve.Evaluate(placeInCurve);
         float torqueOutput = torque * curveMultiplier;
 
-        if (throttleAxis > throttleDeadzone)
-        {
-            totalTorque = torqueOutput * throttleAxis;
-        }
-
         if (rpm > maxRPM)
         {
             totalTorque = 0;
+        }
+        else
+        {
+            totalTorque = torqueOutput;
         }
 
         //apply the torque

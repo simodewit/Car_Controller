@@ -274,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 497446455193573858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -305,7 +305,7 @@ Transform:
   m_GameObject: {fileID: 499699127124380145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -511,6 +511,7 @@ Transform:
   - {fileID: 5136974882157361570}
   - {fileID: 4509194579155246528}
   - {fileID: 4670957277960654098}
+  - {fileID: 6130033543460114681}
   - {fileID: 4418666355636498792}
   - {fileID: 6789540193320401634}
   - {fileID: 852565956441141535}
@@ -1129,7 +1130,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
-  totalGrip: 0
+  totalSidewayGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
@@ -1480,6 +1481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5136974882157361570}
+  - component: {fileID: 3681313329533273529}
   - component: {fileID: 6828432901003150431}
   m_Layer: 0
   m_Name: Engine
@@ -1503,6 +1505,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7510079378311824192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3681313329533273529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696453984831093369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0057ec47ec7be4b9d81d034eb73962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engine: {fileID: 6828432901003150431}
+  engineCapacity: 5
+  throttleDeadzone: 0
+  air: 0
 --- !u!114 &6828432901003150431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1516,9 +1534,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gearBox: {fileID: 2314671419084953047}
-  throttleDeadzone: 0
+  throttleBody: {fileID: 3681313329533273529}
+  fuelTank: {fileID: 8292438423862112847}
   maxRPM: 7500
-  inertia: 0.001
   torque: 500
   torqueCurve:
     serializedVersion: 2
@@ -1580,7 +1598,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rpmChangeRate: 1000
+  fuelUsage: 1
   rpm: 0
   outputTorque: 0
 --- !u!1 &1714477363933023971
@@ -2208,7 +2226,7 @@ Transform:
   m_GameObject: {fileID: 2853844273558936489}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.149, z: -2.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2380,6 +2398,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3339160009330913704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6130033543460114681}
+  - component: {fileID: 8292438423862112847}
+  m_Layer: 0
+  m_Name: Fuel tank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6130033543460114681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339160009330913704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7510079378311824192}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8292438423862112847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339160009330913704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead433fcb782b4b438def771fefed5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuel: 50
 --- !u!1 &3379585209653539785
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,7 +3502,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
-  totalGrip: 0
+  totalSidewayGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
@@ -4622,7 +4685,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
-  totalGrip: 0
+  totalSidewayGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
@@ -4674,6 +4737,7 @@ MonoBehaviour:
   engine: {fileID: 6828432901003150431}
   gearBox: {fileID: 2314671419084953047}
   brakes: {fileID: 1089898495937828498}
+  fuelTank: {fileID: 8292438423862112847}
   tyreFR: {fileID: 6406425358557920688}
   suspensionFR: {fileID: 3770206932899571009}
   tyreFL: {fileID: 2775157751912482328}
@@ -4687,6 +4751,7 @@ MonoBehaviour:
   speed: 0
   engineTorque: 0
   brakeTorque: 0
+  fuel: 0
   suspensionDistanceFR: 0
   gripFR: 0
   suspensionDistanceLF: 0
@@ -6298,7 +6363,7 @@ MonoBehaviour:
   isGrounded: 0
   rpm: 0
   radius: 0
-  totalGrip: 0
+  totalSidewayGrip: 0
   motorTorque: 0
   brakeTorque: 0
   steerAngle: 0
