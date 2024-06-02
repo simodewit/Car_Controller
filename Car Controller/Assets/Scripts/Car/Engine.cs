@@ -25,7 +25,7 @@ public class Engine : MonoBehaviour
 
     //get variables
     [Tooltip("The rpm of the engine")]
-    [HideInInspector] public float rpm;
+    /*[HideInInspector]*/ public float rpm;
     [Tooltip("The output torque of the engine onto the gearbox")]
     [HideInInspector] public float outputTorque;
 
@@ -46,7 +46,7 @@ public class Engine : MonoBehaviour
 
     private void FuelConsumtion()
     {
-        float fuelUsed = throttleBody.air * fuelUsage * 0.001f * Time.fixedDeltaTime;
+        float fuelUsed = throttleBody.air * fuelUsage * 0.001f / 50;
         fuelTank.fuel -= fuelUsed;
     }
 
@@ -60,7 +60,7 @@ public class Engine : MonoBehaviour
 
 
 
-        rpm = rpmToAdd;
+        //rpm = rpmToAdd;
     }
 
     #endregion

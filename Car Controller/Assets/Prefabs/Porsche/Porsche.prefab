@@ -1517,6 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0057ec47ec7be4b9d81d034eb73962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carRb: {fileID: 5875228716191928938}
   engine: {fileID: 6828432901003150431}
   engineCapacity: 5
   throttleDeadzone: 0
@@ -1599,7 +1600,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fuelUsage: 1
-  rpm: 0
+  rpm: 3000
   outputTorque: 0
 --- !u!1 &1714477363933023971
 GameObject:
@@ -3597,8 +3598,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6828432901003150431}
-        m_TargetAssemblyTypeName: Engine, Assembly-CSharp
+      - m_Target: {fileID: 3681313329533273529}
+        m_TargetAssemblyTypeName: ThrottleBody, Assembly-CSharp
         m_MethodName: ThrottleInput
         m_Mode: 0
         m_Arguments:
@@ -4738,6 +4739,7 @@ MonoBehaviour:
   gearBox: {fileID: 2314671419084953047}
   brakes: {fileID: 1089898495937828498}
   fuelTank: {fileID: 8292438423862112847}
+  throttleBody: {fileID: 3681313329533273529}
   tyreFR: {fileID: 6406425358557920688}
   suspensionFR: {fileID: 3770206932899571009}
   tyreFL: {fileID: 2775157751912482328}
@@ -4752,6 +4754,7 @@ MonoBehaviour:
   engineTorque: 0
   brakeTorque: 0
   fuel: 0
+  intakeAir: 0
   suspensionDistanceFR: 0
   gripFR: 0
   suspensionDistanceLF: 0

@@ -51,6 +51,12 @@ public class ThrottleBody : MonoBehaviour
         }
 
         float velocity = carRb.velocity.z;
+
+        if (velocity < 0)
+        {
+            velocity = 0;
+        }
+
         air = 0.5f * engineCapacity * engine.rpm * axis * (velocity / 100);
     }
 
