@@ -1593,30 +1593,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carRb: {fileID: 5875228716191928938}
   tyre: {fileID: 2775157751912482328}
-  spring: 200000
+  spring: 150000
   damper: 5000
-  springTravel: 0.3
-  rideHeight: -0.1
+  springTravel: 0.4
+  rideHeight: -0.2
   springCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.79953
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1671,30 +1671,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carRb: {fileID: 5875228716191928938}
   tyre: {fileID: 8963117182262554756}
-  spring: 200000
+  spring: 150000
   damper: 5000
-  springTravel: 0.3
-  rideHeight: -0.1
+  springTravel: 0.4
+  rideHeight: -0.2
   springCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.79953
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -5618,30 +5618,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carRb: {fileID: 5875228716191928938}
   tyre: {fileID: 2993671199834311460}
-  spring: 200000
+  spring: 150000
   damper: 5000
-  springTravel: 0.3
-  rideHeight: -0.1
+  springTravel: 0.4
+  rideHeight: -0.2
   springCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.79953
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -5945,30 +5945,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carRb: {fileID: 5875228716191928938}
   tyre: {fileID: 6406425358557920688}
-  spring: 200000
+  spring: 150000
   damper: 5000
-  springTravel: 0.3
-  rideHeight: -0.1
+  springTravel: 0.4
+  rideHeight: -0.2
   springCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 0.79953
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.20046997
+      outSlope: 0.20046997
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

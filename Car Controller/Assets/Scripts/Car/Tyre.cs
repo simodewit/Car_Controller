@@ -38,6 +38,8 @@ public class Tyre : MonoBehaviour
     private List<SurfaceType> surfaces = new List<SurfaceType>();
     private Rigidbody rb;
     private float surfaceGrip;
+    private float surfaceResistance;
+    private float minimumResistance;
 
     #endregion
 
@@ -53,6 +55,7 @@ public class Tyre : MonoBehaviour
         SideWaysGrip();
         ForwardGrip();
         StoppingGrip();
+        SurfaceResistance();
     }
 
     public void Update()
@@ -177,12 +180,18 @@ public class Tyre : MonoBehaviour
             isGrounded = true;
 
             float totalGrip = 0;
+            float totalResistance = 0;
+            float minResistance = 0;
             foreach (SurfaceType surface in surfaces)
             {
                 totalGrip += surface.grip / 100;
+                totalResistance += surface.resistance;
+                minResistance += surface.minimumResistance;
             }
 
             surfaceGrip = totalGrip / surfaces.Count;
+            surfaceResistance = totalResistance / surfaces.Count;
+            minimumResistance = minResistance / surfaces.Count;
         }
     }
 
@@ -288,6 +297,24 @@ public class Tyre : MonoBehaviour
         {
             carRb.AddForceAtPosition(torque, forcePoint);
         }
+    }
+
+    #endregion
+
+    #region surfaceResistance
+
+    private void SurfaceResistance()
+    {
+        float resistance = surfaceResistance * carRb.velocity.magnitude;
+
+        if (resistance < minimumResistance)
+        {
+            resistance = minimumResistance;
+        }
+
+        Vector3 resistanceDirection = -carRb.velocity.normalized * resistance;
+
+        carRb.AddForceAtPosition(resistanceDirection, transform.position);
     }
 
     #endregion
