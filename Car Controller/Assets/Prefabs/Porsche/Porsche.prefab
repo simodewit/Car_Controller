@@ -1499,7 +1499,7 @@ Transform:
   m_GameObject: {fileID: 1696453984831093369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.48, z: -1.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1519,8 +1519,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carRb: {fileID: 5875228716191928938}
   engine: {fileID: 6828432901003150431}
-  engineCapacity: 5
   throttleDeadzone: 0
+  minimumAir: 1
   air: 0
 --- !u!114 &6828432901003150431
 MonoBehaviour:
@@ -1538,68 +1538,12 @@ MonoBehaviour:
   throttleBody: {fileID: 3681313329533273529}
   fuelTank: {fileID: 8292438423862112847}
   maxRPM: 7500
-  torque: 500
-  torqueCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.017931268
-      inSlope: -0.02006736
-      outSlope: -0.02006736
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.35644525
-    - serializedVersion: 3
-      time: 0.19821325
-      value: 0.12589276
-      inSlope: 2.0305333
-      outSlope: 2.0305333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.34510145
-      value: 0.79971725
-      inSlope: 2.1145277
-      outSlope: 2.1145277
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.603624
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.09017713
-    - serializedVersion: 3
-      time: 0.7916547
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0.8608475
-      inSlope: -0.66789377
-      outSlope: -0.66789377
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fuelUsage: 1
+  engineCapacity: 5
+  cylinders: 6
+  fuelAirRatio: 14.7
+  engineEfficiency: 25
+  engineFriction: 0
+  inertia: 0
   rpm: 3000
   outputTorque: 0
 --- !u!1 &1714477363933023971
@@ -2409,6 +2353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6130033543460114681}
   - component: {fileID: 8292438423862112847}
+  - component: {fileID: 1014524336290144425}
   m_Layer: 0
   m_Name: Fuel tank
   m_TagString: Untagged
@@ -2425,7 +2370,7 @@ Transform:
   m_GameObject: {fileID: 3339160009330913704}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.46, z: 1.385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2444,6 +2389,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuel: 50
+  energyContent: 34.2
+--- !u!54 &1014524336290144425
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339160009330913704}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3379585209653539785
 GameObject:
   m_ObjectHideFlags: 0

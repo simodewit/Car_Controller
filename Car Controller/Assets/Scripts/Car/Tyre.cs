@@ -102,7 +102,7 @@ public class Tyre : MonoBehaviour
 
         transform.localEulerAngles = localEulers;
 
-        transform.Rotate(new Vector3(rpm, 0, 0) * Time.deltaTime);
+        transform.Rotate(new Vector3(100, 0, 0) * Time.deltaTime);
     }
 
     private void ClampVelocity()
@@ -119,6 +119,11 @@ public class Tyre : MonoBehaviour
 
     private void RPM()
     {
+        if (radius == float.NaN)
+        {
+            return;
+        }
+
         //calculate a dot value for the velocity
         float dotProduct = Vector3.Dot(transform.forward, carRb.velocity.normalized);
         dotProduct = Mathf.Clamp(dotProduct, -1, 1);

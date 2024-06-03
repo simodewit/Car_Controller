@@ -11,10 +11,10 @@ public class ThrottleBody : MonoBehaviour
     [SerializeField] private Rigidbody carRb;
     [Tooltip("The engine script")]
     [SerializeField] private Engine engine;
-    [Tooltip("The engine capacity in liters"),Range(0,20)]
-    [SerializeField] private float engineCapacity;
     [Tooltip("The deadzone in the pedal before the throttle is used"), Range(0, 100)]
     [SerializeField] private float throttleDeadzone = 0;
+    [Tooltip("Minimum amount of air getting thru to keep the car running in stationary conditions in liters")]
+    [SerializeField] private float minimumAir;
 
     //get variables
     [Tooltip("The amount of air intake in liters")]
@@ -50,14 +50,12 @@ public class ThrottleBody : MonoBehaviour
             axis = 0;
         }
 
-        float velocity = carRb.velocity.z;
+        air = engine.engineCapacity * axis;
 
-        if (velocity < 0)
+        if(air < minimumAir)
         {
-            velocity = 0;
+            air = minimumAir;
         }
-
-        air = 0.5f * engineCapacity * engine.rpm * axis * (velocity / 100);
     }
 
     #endregion
