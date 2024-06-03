@@ -82,7 +82,7 @@ public class Engine : MonoBehaviour
         //calculate the amount of joules from the used fuel
         float mlOfFuel = usedFuel * 1000;
         float totalEnergy = joulesPerMl * mlOfFuel;
-        print(joulesPerMl);
+
         //calculate the amount of torque produced by the engine
         float nmOutput = totalEnergy / 1 * cylinders;
 
