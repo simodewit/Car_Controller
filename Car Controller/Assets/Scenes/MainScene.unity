@@ -1970,8 +1970,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &124530935
 GameObject:
   m_ObjectHideFlags: 0
@@ -7177,8 +7177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &422763254
 GameObject:
   m_ObjectHideFlags: 0
@@ -9968,8 +9968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &575849064
 GameObject:
   m_ObjectHideFlags: 0
@@ -10937,8 +10937,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &612949846
 GameObject:
   m_ObjectHideFlags: 0
@@ -22685,8 +22685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &1282698852
 GameObject:
   m_ObjectHideFlags: 0
@@ -24342,8 +24342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &1374329895
 GameObject:
   m_ObjectHideFlags: 0
@@ -31750,8 +31750,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &1726220576
 GameObject:
   m_ObjectHideFlags: 0
@@ -34578,8 +34578,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &1914200701
 GameObject:
   m_ObjectHideFlags: 0
@@ -36757,8 +36757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &2042940067
 GameObject:
   m_ObjectHideFlags: 0
@@ -37525,8 +37525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grip: 100
-  resistance: 100
-  minimumResistance: 20
+  resistance: 10
+  minimumResistance: 0
 --- !u!1 &2086106436
 GameObject:
   m_ObjectHideFlags: 0

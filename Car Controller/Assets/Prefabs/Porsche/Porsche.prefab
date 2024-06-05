@@ -1483,6 +1483,7 @@ GameObject:
   - component: {fileID: 5136974882157361570}
   - component: {fileID: 3681313329533273529}
   - component: {fileID: 6828432901003150431}
+  - component: {fileID: 2643230107869936478}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -1537,17 +1538,33 @@ MonoBehaviour:
   gearBox: {fileID: 2314671419084953047}
   throttleBody: {fileID: 3681313329533273529}
   fuelTank: {fileID: 8292438423862112847}
+  clutch: {fileID: 2643230107869936478}
   maxRPM: 7500
   cutRPM: 7000
   engineCapacity: 4.2
   cylinders: 6
   fuelAirRatio: 14.7
   engineEfficiency: 25
-  engineFriction: 0.01
-  inertia: 0.01
-  crankDiameter: 0.2
+  engineFriction: 0.03
+  inertia: 0.05
+  crankDiameter: 0.5
   rpm: 1000
   outputTorque: 0
+--- !u!114 &2643230107869936478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696453984831093369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a27247449e2b849840a5a07a5ec85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engine: {fileID: 6828432901003150431}
+  outputTorque: 0
+  clutchAxis: 0
 --- !u!1 &1714477363933023971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,7 +2484,7 @@ MonoBehaviour:
   FR: {fileID: 6406425358557920688}
   RL: {fileID: 2993671199834311460}
   RR: {fileID: 8963117182262554756}
-  brakeTorque: 4000
+  brakeTorque: 5000
   brakeBalance: 50
   maxForce: 100
   brakeDeadzone: 0
@@ -3679,6 +3696,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d4a17aee-6215-4f10-82af-f2dc3627249a
     m_ActionName: Car controller/Look behind[/DualShock4GamepadHID/rightStick/down,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2643230107869936478}
+        m_TargetAssemblyTypeName: Clutch, Assembly-CSharp
+        m_MethodName: ClutchInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b6640803-213c-41a5-b051-5ba47cb8a1d9
+    m_ActionName: Car controller/Clutch[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Car controller
@@ -4949,6 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engine: {fileID: 6828432901003150431}
+  clutch: {fileID: 2643230107869936478}
   shiftAssist: 1
   gears:
   - gearNumber: -1

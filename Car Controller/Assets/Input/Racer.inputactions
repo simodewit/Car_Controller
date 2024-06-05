@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Clutch",
+                    "type": "Value",
+                    "id": "b6640803-213c-41a5-b051-5ba47cb8a1d9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Brake",
                     "type": "Value",
                     "id": "cfadcf16-96fe-4e86-a801-b9f9dc3aef2b",
@@ -327,6 +336,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ee35bc0-bebf-4d6e-a54a-5671d75b2114",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Clutch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

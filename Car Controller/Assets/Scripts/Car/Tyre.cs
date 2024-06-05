@@ -293,10 +293,7 @@ public class Tyre : MonoBehaviour
 
         //add modifiers
 
-        if (torque != Vector3.zero)
-        {
-            carRb.AddForceAtPosition(torque, forcePoint);
-        }
+        carRb.AddForceAtPosition(torque, forcePoint);
     }
 
     #endregion

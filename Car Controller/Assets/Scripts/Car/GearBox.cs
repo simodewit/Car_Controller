@@ -10,6 +10,8 @@ public class GearBox : MonoBehaviour
 
     [Tooltip("The script of the engine")]
     [SerializeField] private Engine engine;
+    [Tooltip("The script of the clutch")]
+    [SerializeField] private Clutch clutch;
     [Tooltip("If this is enabled it will stop you from shifting down into a gear that would create to much rpm's")]
     [SerializeField] private bool shiftAssist = true;
     [Tooltip("The info for every gear")]
@@ -76,7 +78,7 @@ public class GearBox : MonoBehaviour
 
     private void CalculateTorque()
     {
-        outputTorque = engine.outputTorque * gears[currentGear + 1].gearRatio;
+        outputTorque = clutch.outputTorque * gears[currentGear + 1].gearRatio;
     }
 
     #endregion

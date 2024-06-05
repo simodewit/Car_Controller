@@ -12,6 +12,8 @@ public class Engine : MonoBehaviour
     [SerializeField] private ThrottleBody throttleBody;
     [Tooltip("The fuel tank script")]
     [SerializeField] private FuelTank fuelTank;
+    [Tooltip("The clutch script")]
+    [SerializeField] private Clutch clutch;
 
     [Tooltip("The maximum rpm that the engine can run"), Range(0, 25000)]
     public int maxRPM = 5000; //has to be public for the gearbox
@@ -34,7 +36,7 @@ public class Engine : MonoBehaviour
 
     //get variables
     [Tooltip("The rpm of the engine")]
-    /*[HideInInspector]*/ public float rpm;
+    [HideInInspector] public float rpm;
     [Tooltip("The output torque of the engine onto the gearbox")]
     [HideInInspector] public float outputTorque;
 
@@ -107,7 +109,7 @@ public class Engine : MonoBehaviour
     private void CalculateRPM()
     {
         //apply the rpm's
-        rpm += RPMWithClutch();
+        rpm += (RPMWithClutch() * clutch.clutchAxis) + (RPMWithoutClutch() * (1 - clutch.clutchAxis));
 
         //stop fuel consumption when over the redline
         if (rpm > maxRPM)
@@ -140,7 +142,18 @@ public class Engine : MonoBehaviour
 
     private float RPMWithoutClutch()
     {
-        float rpmToAdd = 0;
+        //calculate the amount of resistance and friction
+        float rotateResistance = Mathf.Sqrt(inertia * rpm);
+        float totalEngineFriction = engineFriction * rpm;
+
+        //calculate the amount of torque that the engine made
+        float totalTorque = outputTorque - (rotateResistance + totalEngineFriction);
+
+        //calculate the circumfrence
+        float crankshaftCir = crankDiameter * Mathf.PI;
+
+        //calculate the amount of rpm to add
+        float rpmToAdd = totalTorque / crankshaftCir;
 
         return rpmToAdd;
     }
