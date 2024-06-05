@@ -61,7 +61,6 @@ public class GearBox : MonoBehaviour
             }
             else
             {
-                print(afterShiftRPM);
                 print("you moneyshifted");
             }
         }

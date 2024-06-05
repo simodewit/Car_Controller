@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Engine : MonoBehaviour
 {
@@ -16,6 +15,8 @@ public class Engine : MonoBehaviour
 
     [Tooltip("The maximum rpm that the engine can run"), Range(0, 25000)]
     public int maxRPM = 5000; //has to be public for the gearbox
+    [Tooltip("The rpm's that it has to be under in order to stop cutting the fuel for the engine"), Range(0, 25000)]
+    public int cutRPM = 4500; //has to be public for the gearbox
     [Tooltip("The engine capacity in liters"), Range(0, 20)]
     public float engineCapacity; // has to be public for the throttleBody
     [Tooltip("The amount of cylinders that the engine has"), Range(0, 30)]
@@ -28,6 +29,8 @@ public class Engine : MonoBehaviour
     [SerializeField] private float engineFriction;
     [Tooltip("How hard it is for the engine to get the piston movement going circles per rpm")]
     [SerializeField] private float inertia;
+    [Tooltip("The radius of the crankshaft")]
+    [SerializeField] private float crankDiameter;
 
     //get variables
     [Tooltip("The rpm of the engine")]
@@ -36,6 +39,7 @@ public class Engine : MonoBehaviour
     [HideInInspector] public float outputTorque;
 
     private float usedFuel;
+    private float fuelToCut;
 
     #endregion
 
@@ -62,7 +66,7 @@ public class Engine : MonoBehaviour
         float airPerFrame = airPerCylinder / 50;
 
         //calculate the fuel used this frame
-        float fuelUsage = airPerFrame / fuelAirRatio;
+        float fuelUsage = airPerFrame / fuelAirRatio * fuelToCut;
 
         //apply the fuel
         fuelTank.fuel -= fuelUsage;
@@ -80,7 +84,7 @@ public class Engine : MonoBehaviour
         float joulesPerMl = joules * (engineEfficiency / 100);
 
         //calculate the amount of joules from the used fuel
-        float mlOfFuel = usedFuel * 1000;
+        float mlOfFuel = usedFuel * 1000 * 50; // times 1000 to go to liters again and * 50 for something (idk what)
         float totalEnergy = joulesPerMl * mlOfFuel;
 
         //calculate the amount of torque produced by the engine
@@ -102,7 +106,43 @@ public class Engine : MonoBehaviour
 
     private void CalculateRPM()
     {
+        //apply the rpm's
+        rpm += RPMWithClutch();
 
+        //stop fuel consumption when over the redline
+        if (rpm > maxRPM)
+        {
+            fuelToCut = 0;
+        }
+        if (rpm < cutRPM)
+        {
+            fuelToCut = 1;
+        }
+    }
+
+    private float RPMWithClutch()
+    {
+        //calculate the amount of resistance and friction
+        float rotateResistance = Mathf.Sqrt(inertia * rpm);
+        float totalEngineFriction = engineFriction * rpm;
+
+        //calculate the amount of torque that the engine made
+        float totalTorque = outputTorque - (rotateResistance + totalEngineFriction);
+
+        //calculate the circumfrence
+        float crankshaftCir = crankDiameter * Mathf.PI;
+
+        //calculate the amount of rpm to add
+        float rpmToAdd = totalTorque / crankshaftCir;
+
+        return rpmToAdd;
+    }
+
+    private float RPMWithoutClutch()
+    {
+        float rpmToAdd = 0;
+
+        return rpmToAdd;
     }
 
     #endregion
