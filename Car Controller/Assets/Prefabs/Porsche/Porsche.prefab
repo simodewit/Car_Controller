@@ -1536,18 +1536,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gearBox: {fileID: 2314671419084953047}
+  differential: {fileID: 4662686853626657014}
   throttleBody: {fileID: 3681313329533273529}
   fuelTank: {fileID: 8292438423862112847}
   clutch: {fileID: 2643230107869936478}
+  carRb: {fileID: 5875228716191928938}
   maxRPM: 7500
   cutRPM: 7000
   engineCapacity: 4.2
   cylinders: 6
   fuelAirRatio: 14.7
   engineEfficiency: 25
-  engineFriction: 0.03
+  engineFriction: 0.02
   inertia: 0.05
-  crankDiameter: 0.5
+  crankDiameter: 0.08
+  rollingCoefficient: 0.02
   rpm: 1000
   outputTorque: 0
 --- !u!114 &2643230107869936478
@@ -1563,6 +1566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engine: {fileID: 6828432901003150431}
+  gearBox: {fileID: 2314671419084953047}
   outputTorque: 0
   clutchAxis: 0
 --- !u!1 &1714477363933023971
@@ -5468,7 +5472,7 @@ MonoBehaviour:
   RR: {fileID: 8963117182262554756}
   steeringSort: 0
   steeringPercentage: 50
-  steeringDegrees: 20
+  steeringDegrees: 30
   steeringCurve:
     serializedVersion: 2
     m_Curve:

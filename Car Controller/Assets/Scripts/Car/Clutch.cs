@@ -6,13 +6,21 @@ using UnityEngine.InputSystem;
 public class Clutch : MonoBehaviour
 {
     [SerializeField] private Engine engine;
+    [SerializeField] private GearBox gearBox;
 
     [HideInInspector] public float outputTorque;
     [HideInInspector] public float clutchAxis;
 
     public void FixedUpdate()
     {
-        outputTorque = engine.outputTorque * (1 - clutchAxis);
+        if (gearBox.currentGear == 0)
+        {
+            outputTorque = 0;
+        }
+        else
+        {
+            outputTorque = engine.outputTorque * (1 - clutchAxis);
+        }
     }
 
     public void ClutchInput(InputAction.CallbackContext context)

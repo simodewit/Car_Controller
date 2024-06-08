@@ -16,7 +16,7 @@ public class Differential : MonoBehaviour
     [Tooltip("The gearbox script")]
     [SerializeField] private GearBox gearBox;
     [Tooltip("The final gear ratio of the car")]
-    [SerializeField] private float finalGearRatio;
+    public float finalGearRatio; // has to be public for the engine script
     [Tooltip("How much of the differential can be opened or closed"), Range(0, 100)]
     [SerializeField] private float diffLock;
 
