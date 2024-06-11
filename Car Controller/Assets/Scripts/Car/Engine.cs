@@ -169,11 +169,10 @@ public class Engine : MonoBehaviour
 
         //calculate the amount of resistance from the gearbox and differential
         float resAfterDif = rollingResistance / differential.finalGearRatio;
-        float resAfterGearbox = resAfterDif / gearBox.gears[gearBox.currentGear].gearRatio;
-        print("weight = " + weight + "   rollingResistance = " + rollingResistance + "   resAfterDif = " + resAfterDif + "   resAferGearbox = " + resAfterGearbox);
-        print(resAfterGearbox);
+        float resAfterGearbox = resAfterDif / gearBox.gears[gearBox.currentGear + 1].gearRatio;
+
         //calculate the amount of torque that the engine made
-        float totalTorque = outputTorque - (rotateResistance + totalEngineFriction + -resAfterGearbox);
+        float totalTorque = outputTorque - (rotateResistance + totalEngineFriction + -Mathf.Abs(resAfterGearbox));
 
         //calculate the circumfrence
         float crankshaftCir = crankDiameter * Mathf.PI;

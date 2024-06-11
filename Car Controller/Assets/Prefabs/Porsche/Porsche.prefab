@@ -2009,7 +2009,7 @@ MonoBehaviour:
   rightWheel: {fileID: 2993671199834311460}
   gearBox: {fileID: 2314671419084953047}
   finalGearRatio: 4.2
-  diffLock: 0
+  diffLock: 2.5
 --- !u!1 &2380346645341980104
 GameObject:
   m_ObjectHideFlags: 0

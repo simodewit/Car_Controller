@@ -46,12 +46,22 @@ public class Differential : MonoBehaviour
         //calculate the amount of torque before dividing
         float entryTorque = gearBox.outputTorque * finalGearRatio / amountOfDifferentials;
 
-        float leftRPM = leftWheel.rpm;
-        float rightRPM = rightWheel.rpm;
+        //calculate the percentages
+        float average = (leftWheel.rpm + rightWheel.rpm) / 2;
+        float leftFactor = leftWheel.rpm / average;
+        float rightFactor = rightWheel.rpm / average;
+
+        //calculate the min and max for the clamp
+        float min = (100 - diffLock / 2) / 100;
+        float max = (100 + diffLock / 2) / 100;
+
+        //clamp the vallues
+        leftFactor = Mathf.Clamp(leftFactor, min, max);
+        rightFactor = Mathf.Clamp(rightFactor, min, max);
 
         //temp
-        leftWheel.motorTorque = entryTorque / 2;
-        rightWheel.motorTorque = entryTorque / 2;
+        leftWheel.motorTorque = entryTorque / 2 * leftFactor;
+        rightWheel.motorTorque = entryTorque / 2 * rightFactor;
     }
 
     #endregion
