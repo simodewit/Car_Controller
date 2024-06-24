@@ -1481,8 +1481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5136974882157361570}
-  - component: {fileID: 3681313329533273529}
-  - component: {fileID: 6828432901003150431}
+  - component: {fileID: 8955913661625993662}
   - component: {fileID: 2643230107869936478}
   m_Layer: 0
   m_Name: Engine
@@ -1506,7 +1505,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7510079378311824192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3681313329533273529
+--- !u!114 &8955913661625993662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1515,44 +1514,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 1696453984831093369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df0057ec47ec7be4b9d81d034eb73962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carRb: {fileID: 5875228716191928938}
-  engine: {fileID: 6828432901003150431}
-  throttleDeadzone: 0
-  minimumAir: 0.5
-  air: 0
---- !u!114 &6828432901003150431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696453984831093369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80591deafa5bcf24e888b508b275b40d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0347c38b6499ba8429996c4b13dda775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gearBox: {fileID: 2314671419084953047}
-  differential: {fileID: 4662686853626657014}
-  throttleBody: {fileID: 3681313329533273529}
-  fuelTank: {fileID: 8292438423862112847}
-  clutch: {fileID: 2643230107869936478}
-  carRb: {fileID: 5875228716191928938}
-  maxRPM: 7500
-  cutRPM: 7000
-  engineCapacity: 4.2
-  cylinders: 6
-  fuelAirRatio: 14.7
-  engineEfficiency: 25
-  engineFriction: 0.02
-  inertia: 0.05
-  crankDiameter: 0.08
-  rollingCoefficient: 0.02
-  rpm: 1000
+  rb: {fileID: 5875228716191928938}
+  maxRPM: 5000
+  minRPM: 1000
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.14231873
+      inSlope: -0.32880443
+      outSlope: -0.32880443
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.078902215
+    - serializedVersion: 3
+      time: 0.17045537
+      value: 1
+      inSlope: -0.000000703809
+      outSlope: -0.000000703809
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13603504
+    - serializedVersion: 3
+      time: 0.78613925
+      value: 1
+      inSlope: -0.011730416
+      outSlope: -0.011730416
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1304848
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.8159485
+      inSlope: -0.028652707
+      outSlope: -0.028652707
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.58327365
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxTorque: 500
+  rpm: 0
   outputTorque: 0
+  rpmFactor: 1
 --- !u!114 &2643230107869936478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1565,7 +1579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a27247449e2b849840a5a07a5ec85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engine: {fileID: 6828432901003150431}
+  engine: {fileID: 8955913661625993662}
   gearBox: {fileID: 2314671419084953047}
   outputTorque: 0
   clutchAxis: 0
@@ -2005,11 +2019,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ec771a05128d54a9d675f7040fd888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carRb: {fileID: 5875228716191928938}
   leftWheel: {fileID: 8963117182262554756}
   rightWheel: {fileID: 2993671199834311460}
   gearBox: {fileID: 2314671419084953047}
   finalGearRatio: 4.2
   diffLock: 2.5
+  rollingCoefficient: 0.02
+  rollingResistance: 0
 --- !u!1 &2380346645341980104
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,8 +3611,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3681313329533273529}
-        m_TargetAssemblyTypeName: ThrottleBody, Assembly-CSharp
+      - m_Target: {fileID: 8955913661625993662}
+        m_TargetAssemblyTypeName: UnrealisticEngine, Assembly-CSharp
         m_MethodName: ThrottleInput
         m_Mode: 0
         m_Arguments:
@@ -4747,11 +4764,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carRb: {fileID: 5875228716191928938}
-  engine: {fileID: 6828432901003150431}
+  engine: {fileID: 8955913661625993662}
   gearBox: {fileID: 2314671419084953047}
   brakes: {fileID: 1089898495937828498}
   fuelTank: {fileID: 8292438423862112847}
-  throttleBody: {fileID: 3681313329533273529}
   tyreFR: {fileID: 6406425358557920688}
   suspensionFR: {fileID: 3770206932899571009}
   tyreFL: {fileID: 2775157751912482328}
@@ -4766,7 +4782,6 @@ MonoBehaviour:
   engineTorque: 0
   brakeTorque: 0
   fuel: 0
-  intakeAir: 0
   suspensionDistanceFR: 0
   gripFR: 0
   suspensionDistanceLF: 0
@@ -4985,28 +5000,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc638e3ccfe8eb2468d9ac2d89c9c209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engine: {fileID: 6828432901003150431}
+  engine: {fileID: 8955913661625993662}
   clutch: {fileID: 2643230107869936478}
+  differential: {fileID: 4662686853626657014}
   shiftAssist: 1
   gears:
   - gearNumber: -1
     gearRatio: -1.28
+    maxSpeed: 50
   - gearNumber: 0
     gearRatio: 0
+    maxSpeed: 0
   - gearNumber: 1
     gearRatio: 3.154
+    maxSpeed: 80
   - gearNumber: 2
     gearRatio: 2.294
+    maxSpeed: 130
   - gearNumber: 3
     gearRatio: 1.85
+    maxSpeed: 160
   - gearNumber: 4
     gearRatio: 1.522
+    maxSpeed: 200
   - gearNumber: 5
     gearRatio: 1.273
+    maxSpeed: 230
   - gearNumber: 6
     gearRatio: 1.097
+    maxSpeed: 260
   currentGear: 0
   outputTorque: 0
+  rollingResistance: 0
 --- !u!1 &7547144102045308801
 GameObject:
   m_ObjectHideFlags: 0

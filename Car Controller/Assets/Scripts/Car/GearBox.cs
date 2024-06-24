@@ -9,9 +9,11 @@ public class GearBox : MonoBehaviour
     #region variables
 
     [Tooltip("The script of the engine")]
-    [SerializeField] private Engine engine;
+    [SerializeField] private UnrealisticEngine engine;
     [Tooltip("The script of the clutch")]
     [SerializeField] private Clutch clutch;
+    [Tooltip("The Differential script")]
+    [SerializeField] private Differential differential;
     [Tooltip("If this is enabled it will stop you from shifting down into a gear that would create to much rpm's")]
     [SerializeField] private bool shiftAssist = true;
     [Tooltip("The info for every gear")]
@@ -19,6 +21,7 @@ public class GearBox : MonoBehaviour
 
     [HideInInspector] public int currentGear;
     [HideInInspector] public float outputTorque;
+    [HideInInspector] public float rollingResistance;
 
     #endregion
 
@@ -27,6 +30,18 @@ public class GearBox : MonoBehaviour
     public void FixedUpdate()
     {
         CalculateTorque();
+    }
+
+    public void Update()
+    {
+        if (currentGear != 0)
+        {
+            rollingResistance = differential.rollingResistance / gears[currentGear + 1].gearRatio;
+        }
+        else
+        {
+            rollingResistance = 0;
+        }
     }
 
     #endregion
@@ -91,4 +106,6 @@ public class GearInfo
     public int gearNumber;
     [Tooltip("The amount that the engine torque should be multiplied")]
     public float gearRatio;
+    [Tooltip("The max speed in this gear")]
+    public float maxSpeed;
 }

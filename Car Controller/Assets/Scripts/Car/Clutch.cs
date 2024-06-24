@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Clutch : MonoBehaviour
 {
-    [SerializeField] private Engine engine;
+    [SerializeField] private UnrealisticEngine engine;
     [SerializeField] private GearBox gearBox;
 
     [HideInInspector] public float outputTorque;

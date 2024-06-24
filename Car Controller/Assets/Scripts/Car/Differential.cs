@@ -6,7 +6,9 @@ public class Differential : MonoBehaviour
 {
     #region variables
 
-    [Header("Wheels")]
+    [Header("Refrences")]
+    [Tooltip("The refrence to the rigidbody of the car")]
+    [SerializeField] private Rigidbody carRb;
     [Tooltip("The rear left wheelController")]
     [SerializeField] private Tyre leftWheel;
     [Tooltip("The rear right wheelController")]
@@ -20,6 +22,14 @@ public class Differential : MonoBehaviour
     [Tooltip("How much of the differential can be opened or closed"), Range(0, 100)]
     [SerializeField] private float diffLock;
 
+    [Header("resistance")]
+    [Tooltip("The rolling resistance coefficient of the car (normal asphalt coefficient is 0.02)"), Range(0.01f, 0.1f)]
+    [SerializeField] private float rollingCoefficient = 0.02f;
+
+    //get variables
+    [HideInInspector] public float rollingResistance;
+
+    //private variables
     private int amountOfDifferentials;
 
     #endregion
@@ -35,6 +45,13 @@ public class Differential : MonoBehaviour
     public void FixedUpdate()
     {
         Diff();
+    }
+
+    public void Update()
+    {
+        float weight = carRb.mass * Physics.gravity.y;
+        float resistance = rollingCoefficient * weight;
+        rollingResistance = resistance / finalGearRatio;
     }
 
     #endregion
