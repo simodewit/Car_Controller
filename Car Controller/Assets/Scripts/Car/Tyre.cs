@@ -199,6 +199,9 @@ public class Tyre : MonoBehaviour
 
     #region sideways grip
 
+    private Vector3 a;
+    private Vector3 b;
+
     private void SideWaysGrip()
     {
         if (!isGrounded)
@@ -234,6 +237,9 @@ public class Tyre : MonoBehaviour
 
         //apply the force to the car
         carRb.AddForceAtPosition(forceDirection, forcePoint);
+
+        a = forcePoint;
+        b = forcePoint + forceDirection.normalized;
 
         //calculate the total grip of the vehicle
         totalSidewayGrip = forceToPush / idealForce;
@@ -282,7 +288,7 @@ public class Tyre : MonoBehaviour
 
         Vector3 torque = Vector3.zero;
 
-        if (velocity > 0)
+        if (velocity < 0)
         {
             torque = -carRb.transform.forward * (brakeTorque / radius);
         }
